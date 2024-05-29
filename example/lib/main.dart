@@ -8,7 +8,7 @@ late ThawaniFlutter _thawaniFlutterPlugin;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   _thawaniFlutterPlugin = ThawaniFlutter();
-  _thawaniFlutterPlugin.callBackHandler();
+  //_thawaniFlutterPlugin.callBackHandler();
   runApp(const MyApp());
 }
 
@@ -22,11 +22,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    _thawaniFlutterPlugin.paymentCallbackEvent.stream.listen((event) {
-      print('###############################################');
-      print(event);
-      print('###############################################');
-    });
+    // _thawaniFlutterPlugin.paymentCallbackEvent.stream.listen((event) {
+    //   print('###############################################');
+    //   print(event);
+    //   print('###############################################');
+    // });
     super.initState();
   }
 
@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
                 PaymentConfiguration(
                     authKey: 'authKey',
                     remark: 'POS TESTING',
-                    paymentOption: PaymentOption.cardDecline,
+                    paymentOption: PaymentOption.cardAccept,
                     amount: 0.15,
                     production: false,
                     timeoutInMilliseconds: 3000));
