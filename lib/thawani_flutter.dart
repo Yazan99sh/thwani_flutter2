@@ -6,19 +6,13 @@ import 'package:thawani_flutter/models/payment_response.dart';
 import 'thawani_flutter_platform_interface.dart';
 
 class ThawaniFlutter {
-  ThawaniFlutter._singleton();
 
-  static final ThawaniFlutter _instance = ThawaniFlutter._singleton();
-
-  factory ThawaniFlutter() {
-    return _instance;
-  }
+  ThawaniFlutter();
 
   StreamController<PaymentResult> paymentCallbackEvent =
       StreamController<PaymentResult>();
 
   Future<String?> makePayment(PaymentConfiguration configuration) {
-    print('############################################### we are tried to make a payment');
     return ThawaniFlutterPlatform.instance.makePayment(configuration);
   }
 
