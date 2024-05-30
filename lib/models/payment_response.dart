@@ -1,6 +1,6 @@
 class PaymentResult {
   bool status;
-  String message;
+  String? message;
   String? paymentId;
   String? invoice;
   int? paymentStatus;
