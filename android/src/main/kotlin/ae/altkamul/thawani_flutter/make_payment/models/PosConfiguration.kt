@@ -13,7 +13,7 @@ data class PosConfiguration(
 ) {
 
     companion object {
-        fun convertHashMapToModel(hashMap: HashMap<String, Object>): PosConfiguration {
+        fun convertHashMapToModel(hashMap: HashMap<String, Any>): PosConfiguration {
             return PosConfiguration(
                 hashMap["authKey"] as String,
                 hashMap["remark"] as? String,

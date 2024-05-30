@@ -41,7 +41,7 @@ class ThwaniPaymentView : Activity() {
 
     private fun initViews() {
         val intent = intent ?: return
-        val extraString = intent.getSerializableExtra("paymentDetails") as? HashMap<String, Object>
+        val extraString = intent.getSerializableExtra("paymentDetails") as? HashMap<String, Any>
         extraString?.let {
             val configuration = PosConfiguration.convertHashMapToModel(it)
             processCPOCSale(configuration)
@@ -100,7 +100,7 @@ class ThwaniPaymentView : Activity() {
                 }
             }
             val handler = Handler(Looper.getMainLooper())
-            handler.post {
+            handler.postDelayed({
                 Middleware.channel?.invokeMethod(
                     "makePayment",
                     arguments,
@@ -122,17 +122,8 @@ class ThwaniPaymentView : Activity() {
                         }
                     }
                 )
-
-//                Thread {
-//                    try {
-//                        sendNotification(status)
-//                    } catch (e: Exception) {
-//                        e.printStackTrace()
-//                    }
-//                }.start()
-
                 finish()
-            }
+            },1000)
         }
     }
 }
