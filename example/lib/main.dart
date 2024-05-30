@@ -22,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    ThawaniFlutter.paymentCallbackEvent.stream.listen((event) {
+    _thawaniFlutterPlugin.paymentCallbackEvent.stream.listen((event) {
       print('###############################################');
       print(event);
       print('###############################################');
