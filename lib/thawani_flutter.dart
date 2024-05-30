@@ -18,6 +18,7 @@ class ThawaniFlutter {
       StreamController<PaymentResult>();
 
   Future<String?> makePayment(PaymentConfiguration configuration) {
+    print('############################################### we are tried to make a payment');
     return ThawaniFlutterPlatform.instance.makePayment(configuration);
   }
 
