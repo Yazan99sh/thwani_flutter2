@@ -25,10 +25,16 @@ class ThawaniFlutter {
     return _methodCallHandler(
       (event) {
         if (paymentCallbackEvent.isClosed) {
+          print('############################################### paymentCallbackEvent was closed');
           paymentCallbackEvent = StreamController<PaymentResult>();
         }
         var paymentResult = PaymentResult.fromJson(event.arguments);
+        print('############################################### we are sending the event to the stream');
         paymentCallbackEvent.add(paymentResult);
+        paymentCallbackEvent.add(paymentResult);
+        paymentCallbackEvent.add(paymentResult);
+        paymentCallbackEvent.add(paymentResult);
+        print('############################################### we are sending the event to the stream');
         return Future.value("success");
       },
     );
