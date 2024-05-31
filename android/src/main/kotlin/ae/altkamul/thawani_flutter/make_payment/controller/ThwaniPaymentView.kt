@@ -100,7 +100,8 @@ class ThwaniPaymentView : Activity() {
                 }
             }
             val handler = Handler(Looper.getMainLooper())
-            handler.postDelayed({
+            Log.i("Posting", "Posting to flutter channel")
+            handler.post({
                 Middleware.channel?.invokeMethod(
                     "makePayment",
                     arguments,
@@ -123,7 +124,7 @@ class ThwaniPaymentView : Activity() {
                     }
                 )
                 finish()
-            },1000)
+            })
         }
     }
 }
