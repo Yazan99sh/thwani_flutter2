@@ -49,6 +49,7 @@ class ThawaniFlutter {
     _streamSubscription = _paymentCallbackEvent.stream.listen((event) {
       print('###############################################');
       print(event);
+      callback(event);
       print('###############################################');
     });
   }
