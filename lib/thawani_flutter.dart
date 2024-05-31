@@ -6,10 +6,13 @@ import 'package:thawani_flutter/models/payment_response.dart';
 import 'thawani_flutter_platform_interface.dart';
 
 class ThawaniFlutter {
+  ThawaniFlutter._();
 
-  ThawaniFlutter();
+  static final ThawaniFlutter _instance = ThawaniFlutter._();
 
-  StreamController<PaymentResult> paymentCallbackEvent =
+  factory ThawaniFlutter() => _instance;
+
+  StreamController<PaymentResult> _paymentCallbackEvent =
       StreamController<PaymentResult>();
 
   Future<String?> makePayment(PaymentConfiguration configuration) {
@@ -19,14 +22,17 @@ class ThawaniFlutter {
   Future<String?> callBackHandler() {
     return _methodCallHandler(
       (event) {
-        if (paymentCallbackEvent.isClosed) {
-          print('############################################### paymentCallbackEvent was closed');
-          paymentCallbackEvent = StreamController<PaymentResult>();
+        if (_paymentCallbackEvent.isClosed) {
+          print(
+              '############################################### paymentCallbackEvent was closed');
+          _paymentCallbackEvent = StreamController<PaymentResult>();
         }
         var paymentResult = PaymentResult.fromJson(event.arguments);
-        print('############################################### we are sending the event to the stream');
-        paymentCallbackEvent.add(paymentResult);
-        print('############################################### we are sending the event to the stream');
+        print(
+            '############################################### we are sending the event to the stream');
+        _paymentCallbackEvent.add(paymentResult);
+        print(
+            '############################################### we are sending the event to the stream');
         return Future.value("success");
       },
     );
@@ -35,5 +41,19 @@ class ThawaniFlutter {
   Future<String?> _methodCallHandler(
       Future<String?> Function(MethodCall) handler) {
     return ThawaniFlutterPlatform.instance.methodCallHandler(handler);
+  }
+
+  StreamSubscription? _streamSubscription;
+
+  startListening() {
+    _streamSubscription = _paymentCallbackEvent.stream.listen((event) {
+      print('###############################################');
+      print(event);
+      print('###############################################');
+    });
+  }
+
+  stopListening() {
+    _streamSubscription?.cancel();
   }
 }
