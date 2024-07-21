@@ -5,6 +5,9 @@ class PaymentConfiguration {
   double amount;
   bool production = false;
   int timeoutInMilliseconds;
+  bool sendNotification;
+  String? notificationToken;
+  String? notificationTopic;
 
   PaymentConfiguration({
     required this.authKey,
@@ -13,6 +16,9 @@ class PaymentConfiguration {
     required this.amount,
     required this.production,
     required this.timeoutInMilliseconds,
+    required this.sendNotification,
+    required this.notificationToken,
+    required this.notificationTopic,
   });
 
   toJson() {
@@ -23,7 +29,10 @@ class PaymentConfiguration {
         'paymentOption': paymentOption.value,
         'amount': amount,
         'production': production,
-        'timeoutInMilliseconds': timeoutInMilliseconds
+        'timeoutInMilliseconds': timeoutInMilliseconds,
+        'sendNotification': sendNotification,
+        'notificationToken': notificationToken,
+        'notificationTopic': notificationTopic,
       },
     };
   }
