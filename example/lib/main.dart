@@ -101,26 +101,25 @@ class _MyAppState extends State<MyApp> {
             //     try {
             //       final result = await _thawaniFlutterPlugin
             //           .makePayment(PaymentConfiguration(
-            //         authKey: '',
+            //         authKey: 'saddasd',
             //         remark: 'POS TESTING',
             //         paymentOption: PaymentOption.cardAccept,
             //         amount: 1,
             //         production: false,
             //         timeoutInMilliseconds: 3000,
-            //         sendNotification: true,
+            //         sendNotification: false,
             //         notificationToken:
             //             '',
             //         notificationTopic: 'payment_receiver',
             //       ));
-            //       print(result);
             //     } on PlatformException catch (e) {
             //       print(e);
             //     }
             //   },
             //   child: const Text('Open Thawani POS'),
             // ),
-            //
-            //
+
+
           ],
         ),
       )),

@@ -105,6 +105,7 @@ class ThwaniPaymentView : Activity() {
                 }
             }
             val handler = Handler(Looper.getMainLooper())
+            //Log.i("Payment Finished", "Payment Response Details: " + arguments.toString())
             Log.i("Posting", "Posting to flutter channel")
             handler.post({
                 try {
@@ -140,7 +141,7 @@ class ThwaniPaymentView : Activity() {
                                 arguments["status"] as Boolean,
                                 posConfiguration!!.notifcationToken,
                                 posConfiguration!!.notifcationTopic ?: "",
-                                arguments["paymentId"].toString(),
+                                arguments["invoice"].toString(),
                                 arguments["message"].toString()
                             )
                         }
@@ -198,7 +199,7 @@ class ThwaniPaymentView : Activity() {
             .post(body)
             .addHeader("Content-Type", "application/json")
             .build()
-        Log.e("PrepareRequest ------------->", "Success" + request.toString());
+        //Log.e("PrepareRequest ------------->", "Success" + request.toString());
         try {
             val response: Response = client.newCall(request).execute()
             System.out.println(response.body?.string())
