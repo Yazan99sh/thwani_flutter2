@@ -31,6 +31,9 @@ class _MyAppState extends State<MyApp> {
     PushyService.init().whenComplete(() {
       PushyService.pushySubscribe('payment_thwani');
     });
+    _thawaniFlutterPlugin.startListening((event) {
+      print('===========================================');
+    });
     super.initState();
   }
 

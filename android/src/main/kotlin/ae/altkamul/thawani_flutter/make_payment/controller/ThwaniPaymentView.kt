@@ -107,53 +107,55 @@ class ThwaniPaymentView : Activity() {
             val handler = Handler(Looper.getMainLooper())
             //Log.i("Payment Finished", "Payment Response Details: " + arguments.toString())
             Log.i("Posting", "Posting to flutter channel")
-            handler.post({
+            val thread = Thread {
                 try {
-                    Log.i("Posting", "Posting to flutter channel " + Middleware.channel)
-                    Middleware.channel?.invokeMethod(
-                        "makePayment",
-                        arguments,
-                        object : MethodChannel.Result {
-                            override fun success(result: Any?) {
-                                Log.i("fromInvoke", "success: $result")
-                            }
-
-                            override fun error(
-                                errorCode: String,
-                                errorMessage: String?,
-                                errorDetails: Any?
-                            ) {
-                                Log.i("fromInvoke", "failed: $errorMessage")
-                            }
-
-                            override fun notImplemented() {
-                                Log.i("fromInvoke", "not implemented")
-                            }
-                        }
-                    )
-                } catch (e: Exception) {
-                    Log.e("Exception", e.toString())
-                }
-                val thread = Thread {
-                    try {
-                        if (posConfiguration!!.sendNotification) {
-                            sendNotification(
-                                arguments["status"] as Boolean,
-                                posConfiguration!!.notifcationToken,
-                                posConfiguration!!.notifcationTopic ?: "",
-                                arguments["invoice"].toString(),
-                                arguments["message"].toString()
-                            )
-                        }
-                    } catch (e: java.lang.Exception) {
-                        Log.e("ExeptionDetected ------------->", e.toString())
-                        e.printStackTrace()
+                    if (posConfiguration!!.sendNotification) {
+                        sendNotification(
+                            arguments["status"] as Boolean,
+                            posConfiguration!!.notifcationToken,
+                            posConfiguration!!.notifcationTopic ?: "",
+                            arguments["invoice"].toString(),
+                            arguments["message"].toString()
+                        )
                     }
+                    handler.post({
+                        try {
+                            Log.i("Posting", "Posting to flutter channel " + Middleware.channel)
+                            Middleware.channel?.invokeMethod(
+                                "makePayment",
+                                arguments,
+                                object : MethodChannel.Result {
+                                    override fun success(result: Any?) {
+                                        Log.i("fromInvoke", "success: $result")
+                                    }
+
+                                    override fun error(
+                                        errorCode: String,
+                                        errorMessage: String?,
+                                        errorDetails: Any?
+                                    ) {
+                                        Log.i("fromInvoke", "failed: $errorMessage")
+                                    }
+
+                                    override fun notImplemented() {
+                                        Log.i("fromInvoke", "not implemented")
+                                    }
+                                }
+                            )
+                        } catch (e: Exception) {
+                            Log.e("Exception", e.toString())
+                        }
+                    })
+                } catch (e: java.lang.Exception) {
+                    Log.e("ExeptionDetected ------------->", e.toString())
+                    e.printStackTrace()
                 }
-                Log.e("ThreadForNotificationStarted ------------->", "&&&&")
+            }
+            Log.e("ThreadForNotificationStarted ------------->", "&&&&")
+            finish()
+            handler.postDelayed({
                 thread.start()
-                finish()
-            })
+            }, 1500);
         }
     }
     fun sendNotification(
