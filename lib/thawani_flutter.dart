@@ -15,7 +15,8 @@ class ThawaniFlutter {
   StreamController<PaymentResult> _paymentCallbackEvent =
       StreamController<PaymentResult>();
 
-  Future<String?> makePayment(PaymentConfiguration configuration) {
+  Future<Map<Object?, Object?>?> makePayment(PaymentConfiguration configuration) {
+    _paymentCallbackEvent.close();
     return ThawaniFlutterPlatform.instance.makePayment(configuration);
   }
 
@@ -23,16 +24,10 @@ class ThawaniFlutter {
     return _methodCallHandler(
       (event) {
         if (_paymentCallbackEvent.isClosed) {
-          print(
-              '############################################### paymentCallbackEvent was closed');
           _paymentCallbackEvent = StreamController<PaymentResult>();
         }
         var paymentResult = PaymentResult.fromJson(event.arguments);
-        print(
-            '############################################### we are sending the event to the stream');
         _paymentCallbackEvent.add(paymentResult);
-        print(
-            '############################################### we are sending the event to the stream');
         return Future.value("success");
       },
     );

@@ -1,6 +1,7 @@
 package ae.altkamul.thawani_flutter
 
 import ae.altkamul.thawani_flutter.make_payment.Middleware
+import ae.altkamul.thawani_flutter.make_payment.controller.ThawaniCallback
 import ae.altkamul.thawani_flutter.make_payment.controller.ThwaniPaymentView
 import android.content.Context
 import android.content.Intent
@@ -35,9 +36,14 @@ class ThawaniFlutterPlugin: FlutterPlugin, MethodCallHandler {
       intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK
       // Pass payment details to the PaymentActivity if needed
       intent.putExtra("paymentDetails", arguments)
+      val callback = object : ThawaniCallback {
+        override fun onPaymentFinish(data: HashMap<String, Any>?) {
+          result.success(data);
+        }
+      }
+      ThwaniPaymentView.callback = callback
       // Start the activity
       context?.startActivity(intent)
-      result.success("Payment initiated");
     } else {
       result.notImplemented()
     }

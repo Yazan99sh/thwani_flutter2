@@ -29,7 +29,7 @@ abstract class ThawaniFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<String?> makePayment(PaymentConfiguration configuration) {
+  Future<Map<Object?, Object?>?> makePayment(PaymentConfiguration configuration) {
     throw UnimplementedError('makePayment() has not been implemented.');
   }
 

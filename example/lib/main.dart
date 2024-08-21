@@ -99,28 +99,28 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-            // ElevatedButton(
-            //   onPressed: () async {
-            //     try {
-            //       final result = await _thawaniFlutterPlugin
-            //           .makePayment(PaymentConfiguration(
-            //         authKey: 'saddasd',
-            //         remark: 'POS TESTING',
-            //         paymentOption: PaymentOption.cardAccept,
-            //         amount: 1,
-            //         production: false,
-            //         timeoutInMilliseconds: 3000,
-            //         sendNotification: false,
-            //         notificationToken:
-            //             '',
-            //         notificationTopic: 'payment_receiver',
-            //       ));
-            //     } on PlatformException catch (e) {
-            //       print(e);
-            //     }
-            //   },
-            //   child: const Text('Open Thawani POS'),
-            // ),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  final result = await _thawaniFlutterPlugin
+                      .makePayment(PaymentConfiguration(
+                    authKey: 'saddasd',
+                    remark: 'POS TESTING',
+                    paymentOption: PaymentOption.cardAccept,
+                    amount: 1,
+                    production: false,
+                    timeoutInMilliseconds: 3000,
+                    sendNotification: false,
+                    notificationToken:
+                        '',
+                    notificationTopic: 'payment_receiver',
+                  ));
+                } on PlatformException catch (e) {
+                  print(e);
+                }
+              },
+              child: const Text('Open Thawani POS'),
+            ),
 
 
           ],

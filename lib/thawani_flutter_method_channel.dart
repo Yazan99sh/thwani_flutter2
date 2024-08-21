@@ -18,8 +18,8 @@ class MethodChannelThawaniFlutter extends ThawaniFlutterPlatform {
   }
 
   @override
-  Future<String?> makePayment(PaymentConfiguration configuration) async {
-    final result = await methodChannel.invokeMethod<String>(
+  Future<Map<Object?, Object?>?> makePayment(PaymentConfiguration configuration) async {
+    final result = await methodChannel.invokeMethod<Map<Object?, Object?>?>(
         'makePayment', configuration.toJson());
     return result;
   }

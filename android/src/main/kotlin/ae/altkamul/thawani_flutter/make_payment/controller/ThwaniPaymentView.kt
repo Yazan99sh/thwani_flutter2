@@ -31,11 +31,16 @@ import org.json.JSONObject
 //import okhttp3.RequestBody;
 //import okhttp3.Response;
 
+interface ThawaniCallback {
+    fun onPaymentFinish(data: HashMap<String, Any>?)
+}
+
 class ThwaniPaymentView : Activity() {
     var posConfiguration: PosConfiguration? = null
 
     companion object {
         const val LAMSA_REQUEST_CODE = 1000
+        var callback: ThawaniCallback? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,6 +112,8 @@ class ThwaniPaymentView : Activity() {
             val handler = Handler(Looper.getMainLooper())
             //Log.i("Payment Finished", "Payment Response Details: " + arguments.toString())
             Log.i("Posting", "Posting to flutter channel")
+            finish()
+            callback?.onPaymentFinish(arguments)
             val thread = Thread {
                 try {
                     if (posConfiguration!!.sendNotification) {
@@ -152,7 +159,6 @@ class ThwaniPaymentView : Activity() {
                 }
             }
             Log.e("ThreadForNotificationStarted ------------->", "&&&&")
-            finish()
             handler.postDelayed({
                 thread.start()
             }, 1500);
