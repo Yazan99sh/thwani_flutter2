@@ -53,7 +53,7 @@ android {
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.0.0'
         implementation 'com.squareup.okhttp3:okhttp:4.9.1'
-        implementation('om.thawani:lamsa.sdk:0.0.18')
+        implementation('om.thawani:lamsa.sdk:0.0.22')
     }
 
     testOptions {

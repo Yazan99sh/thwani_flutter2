@@ -6,13 +6,11 @@ dependencyResolutionManagement {
         mavenCentral()
         // Add this line here
         maven {
-            url "https://gitlab.com/api/v4/projects/56241412/packages/maven"
-            credentials(HttpHeaderCredentials) {
-                name = "Private-Token"
-                value = "glpat-AnpybHxca8jMDDqzuFFA"
-            }
-            authentication {
-                header(HttpHeaderAuthentication)
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/ThawaniMobile/Lamsa-SDK")
+            credentials {
+                username = "ThawaniMobile"
+                password = "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"
             }
         }
     }
