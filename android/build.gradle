@@ -53,7 +53,8 @@ android {
         testImplementation 'org.jetbrains.kotlin:kotlin-test'
         testImplementation 'org.mockito:mockito-core:5.0.0'
         implementation 'com.squareup.okhttp3:okhttp:4.9.1'
-        implementation('om.thawani:lamsa.sdk:0.0.22')
+        // 0.0.33: liblamsa-native.so is 16 KB page aligned (Google Play requirement).
+        implementation('om.thawani:lamsa.sdk:0.0.33')
     }
 
     testOptions {
